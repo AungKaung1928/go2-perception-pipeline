@@ -27,3 +27,8 @@ jobs:
         run: |
           source install/setup.bash
           ros2 pkg prefix perception_pipeline
+      - name: Launch test (filter node as its own process)
+        run: |
+          source install/setup.bash
+          cd src/perception_pipeline
+          launch_test test/test_launch_filter.py
