@@ -5,6 +5,7 @@ and just outside the pass-through limits (z from -0.3 to 5.0 m, sensor frame) an
 exactly which points come back on /velodyne_filtered, and that the header is kept.
 Run: launch_test test/test_launch_filter.py (after sourcing the workspace).
 """
+import os
 import time
 import unittest
 
@@ -60,6 +61,11 @@ class TestFilter(unittest.TestCase):
         self.assertEqual(out.header.frame_id, 'velodyne')
         zs = sorted(round(float(p[0]), 2) for p in point_cloud2.read_points(out, field_names=('z',)))
         self.assertEqual(zs, sorted(KEPT_Z))
+        path = os.environ.get('FILTER_CSV')  # optional, for scripts/plot_filter.py
+        if path:
+            with open(path, 'w') as f:
+                f.write('z,returned\n')
+                f.writelines(f'{z},{int(round(z, 2) in zs)}\n' for z in KEPT_Z + DROPPED_Z)
 
 
 @launch_testing.post_shutdown_test()

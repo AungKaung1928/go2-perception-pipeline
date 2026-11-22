@@ -31,4 +31,12 @@ jobs:
         run: |
           source install/setup.bash
           cd src/perception_pipeline
-          launch_test test/test_launch_filter.py
+          FILTER_CSV=$GITHUB_WORKSPACE/filter.csv launch_test test/test_launch_filter.py
+          python3 scripts/plot_filter.py $GITHUB_WORKSPACE/filter.csv $GITHUB_WORKSPACE/filter.svg
+      - name: Upload the filter result
+        uses: actions/upload-artifact@v4
+        with:
+          name: filter
+          path: |
+            filter.csv
+            filter.svg
