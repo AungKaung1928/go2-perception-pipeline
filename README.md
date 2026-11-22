@@ -39,7 +39,7 @@ sudo apt install ros-humble-gazebo-ros2-control \
 mkdir -p ~/go2_sim_ws/src
 cd ~/go2_sim_ws/src
 git clone https://github.com/anujjain-dev/unitree-go2-ros2.git
-git clone https://github.com/AungKaung1928/go2-perception-pipeline.git perception_pipeline
+git clone <this repo URL> perception_pipeline
 
 # Install ROS dependencies
 cd ~/go2_sim_ws
@@ -88,4 +88,4 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 ## License
 
-MIT
+MIT, see LICENSE.
