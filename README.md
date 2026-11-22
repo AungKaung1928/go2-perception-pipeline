@@ -88,6 +88,10 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 Test without Gazebo: `cd src/perception_pipeline && launch_test test/test_launch_filter.py` (after `source install/setup.bash`) starts the installed node, sends one cloud with points just inside and outside those limits and checks exactly which come back (8 in, 4 out). CI runs it in `ros:humble` on every push.
 
+![Launch-test cloud on a height axis: the 4 points between -0.3 m and 5.0 m come back, the 4 just outside do not](docs/filter.svg)
+
+The launch test's known-answer cloud (CI run 273a387, CSV artifact plotted by `scripts/plot_filter.py`).
+
 ## License
 
 MIT, see LICENSE.
