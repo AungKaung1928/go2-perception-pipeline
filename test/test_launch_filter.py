@@ -58,7 +58,7 @@ class TestFilter(unittest.TestCase):
         self.assertTrue(got, 'no /velodyne_filtered message within 20 s')
         out = got[-1]
         self.assertEqual(out.header.frame_id, 'velodyne')
-        zs = sorted(round(p[2], 2) for p in point_cloud2.read_points(out, field_names=('z',)))
+        zs = sorted(round(float(p[0]), 2) for p in point_cloud2.read_points(out, field_names=('z',)))
         self.assertEqual(zs, sorted(KEPT_Z))
 
 
