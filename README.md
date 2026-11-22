@@ -56,7 +56,7 @@ Terminal 1 — Launch Gazebo with custom world:
 ```bash
 source ~/go2_sim_ws/install/setup.bash
 ros2 launch go2_config gazebo_velodyne.launch.py \
-  world:=/home/$USER/go2_sim_ws/src/unitree-go2-ros2/robots/configs/go2_config/worlds/perception_world.world
+  world:=$HOME/go2_sim_ws/src/perception_pipeline/config/perception_world.world
 ```
 
 Terminal 2 — Run perception node:
