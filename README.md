@@ -81,10 +81,12 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 /velodyne_points (raw, ~9Hz, ~5000 pts)
         |
-  ground_filter_node (PCL PassThrough Z-axis)
+  ground_filter_node (PCL PassThrough, keeps -0.3 m <= z <= 5.0 m in the sensor frame)
         |
 /velodyne_filtered (obstacles only, ~2700 pts)
 ```
+
+Test without Gazebo: `cd src/perception_pipeline && launch_test test/test_launch_filter.py` (after `source install/setup.bash`) starts the installed node, sends one cloud with points just inside and outside those limits and checks exactly which come back (8 in, 4 out). CI runs it in `ros:humble` on every push.
 
 ## License
 
