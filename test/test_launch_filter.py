@@ -2,7 +2,7 @@
 
 The test process publishes one synthetic cloud on /velodyne_points with points just inside
 and just outside the pass-through limits (z from -0.3 to 5.0 m, sensor frame) and checks
-exactly which points come back on /velodyne_filtered, and that the header is kept.
+exactly which points come back on /velodyne_filtered (a NaN point must not), and that the header is kept.
 Run: launch_test test/test_launch_filter.py (after sourcing the workspace).
 """
 import os
@@ -48,6 +48,7 @@ class TestFilter(unittest.TestCase):
         pub = probe.create_publisher(PointCloud2, '/velodyne_points', 10)
         header = Header(frame_id='velodyne')
         points = [(1.0, float(i), z) for i, z in enumerate(KEPT_Z + DROPPED_Z)]
+        points.append((1.0, 9.0, float('nan')))  # no-return beam, as real LiDAR clouds contain
         cloud = point_cloud2.create_cloud_xyz32(header, points)
         try:
             start = time.monotonic()
